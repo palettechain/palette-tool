@@ -5,11 +5,11 @@ import (
 	"time"
 
 	"github.com/ipfs/go-log"
-	"github.com/palettechain/testtool/config"
-	"github.com/palettechain/testtool/utils"
+	"github.com/palettechain/palette-tool/config"
+	"github.com/palettechain/palette-tool/utils"
 )
 
-const cfgPath = "/Users/dylen/software/palette/testtool/config.toml"
+const cfgPath = "config.toml"
 
 var (
 	logger = log.Logger("geth")
@@ -19,8 +19,8 @@ var (
 
 func main() {
 	// testMint()
-	// testTransfer()
-	testApprove()
+	testTransfer()
+	// testApprove()
 	// testTotalSupply(c)
 	// testDecimals()
 }

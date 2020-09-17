@@ -1,4 +1,4 @@
-module github.com/palettechain/testtool
+module github.com/palettechain/palette-tool
 
 go 1.13
 
@@ -13,5 +13,5 @@ replace (
 	github.com/coreos/go-semver v0.0.1 => github.com/polynetwork/coreos-semver v0.0.1
 	github.com/coreos/go-systemd v0.0.1 => github.com/polynetwork/coreos-systemd v0.0.1
 	github.com/coreos/pkg v0.0.1 => github.com/polynetwork/coreos-pkg v0.0.1
-	github.com/ethereum/go-ethereum v1.0.0 => ../../../workspace/gohome/src/github.com/palettechain/palette
+	github.com/ethereum/go-ethereum v1.0.0 => ../palette
 )

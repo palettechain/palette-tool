@@ -6,7 +6,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/accounts/keystore"
 	"github.com/ethereum/go-ethereum/rpc"
-	"github.com/palettechain/testtool/config"
+	"github.com/palettechain/palette-tool/config"
 )
 
 type PaletteClient struct {

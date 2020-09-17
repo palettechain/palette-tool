@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/contracts/native"
 	"github.com/ethereum/go-ethereum/contracts/native/plt"
@@ -15,13 +16,15 @@ import (
 )
 
 var (
+	ABI        abi.ABI
 	logger     = log.Logger("palette")
 	PLTAddress = common.HexToAddress(native.PLTContractAddress)
 )
 
 func init() {
-	plt.InitABI()
+	ABI = plt.GetABI()
 }
+
 //
 //func (c *PaletteClient) PLTMint(amount *big.Int) (common.Hash, error) {
 //	payload, err := utils.PackMethod(plt.ABI, plt.MethodMint, c.AdminAddress(), amount)
@@ -33,7 +36,7 @@ func init() {
 //}
 
 func (c *PaletteClient) PLTTransfer(key *ecdsa.PrivateKey, to common.Address, amount *big.Int) (common.Hash, error) {
-	payload, err := utils.PackMethod(plt.ABI, plt.MethodTransfer, to, amount)
+	payload, err := utils.PackMethod(ABI, plt.MethodTransfer, to, amount)
 	if err != nil {
 		return common.Hash{}, err
 	}
@@ -42,7 +45,7 @@ func (c *PaletteClient) PLTTransfer(key *ecdsa.PrivateKey, to common.Address, am
 }
 
 func (c *PaletteClient) PLTTransferFrom(key *ecdsa.PrivateKey, from, to common.Address, amount *big.Int) (common.Hash, error) {
-	payload, err := utils.PackMethod(plt.ABI, plt.MethodTransferFrom, from, to, amount)
+	payload, err := utils.PackMethod(ABI, plt.MethodTransferFrom, from, to, amount)
 	if err != nil {
 		return common.Hash{}, err
 	}
@@ -51,7 +54,7 @@ func (c *PaletteClient) PLTTransferFrom(key *ecdsa.PrivateKey, from, to common.A
 }
 
 func (c *PaletteClient) PLTApprove(key *ecdsa.PrivateKey, spender common.Address, amount *big.Int) (common.Hash, error) {
-	payload, err := utils.PackMethod(plt.ABI, plt.MethodApprove, spender, amount)
+	payload, err := utils.PackMethod(ABI, plt.MethodApprove, spender, amount)
 	if err != nil {
 		return common.Hash{}, err
 	}
@@ -60,7 +63,7 @@ func (c *PaletteClient) PLTApprove(key *ecdsa.PrivateKey, spender common.Address
 }
 
 func (c *PaletteClient) PLTTotalSupply() (*big.Int, error) {
-	payload, err := utils.PackMethod(plt.ABI, plt.MethodTotalSupply)
+	payload, err := utils.PackMethod(ABI, plt.MethodTotalSupply)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +78,7 @@ func (c *PaletteClient) PLTTotalSupply() (*big.Int, error) {
 }
 
 func (c *PaletteClient) PLTDecimals() (uint64, error) {
-	payload, err := utils.PackMethod(plt.ABI, plt.MethodDecimals)
+	payload, err := utils.PackMethod(ABI, plt.MethodDecimals)
 	if err != nil {
 		return 0, err
 	}
