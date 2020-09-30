@@ -1,4 +1,4 @@
-rpc = "http://localhost:22000"
+rpc = "http://106.75.246.130:22000"
 
 [admin]
     KeyFile = "/Users/dylen/software/palette-chain-example/admin/keystore/UTC--2020-09-11T02-29-49.024005000Z--f3a9d42c01635a585f1721463842f8936075105f"

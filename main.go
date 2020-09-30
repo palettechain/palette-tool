@@ -35,7 +35,7 @@ func main() {
 //	}
 //	logger.Infof("mint hash %s", hash.Hex())
 //
-//	time.Sleep(7 * time.Second)
+//	waitCommit()
 //
 //	if err := c.DumpEventLog(hash); err != nil {
 //		logger.Fatal(err)
@@ -55,7 +55,7 @@ func testTransfer() {
 	}
 	logger.Infof("transfer hash %s", hash.Hex())
 
-	time.Sleep(7 * time.Second)
+	waitCommit()
 
 	if err := c.DumpEventLog(hash); err != nil {
 		logger.Fatal(err)
@@ -76,7 +76,7 @@ func testApprove() {
 	}
 	logger.Infof("approve hash %s", hash.Hex())
 
-	time.Sleep(7 * time.Second)
+	waitCommit()
 
 	if err := c.DumpEventLog(hash); err != nil {
 		logger.Fatal(err)
@@ -99,4 +99,8 @@ func testDecimals() {
 		logger.Fatal(err)
 	}
 	logger.Infof("PLT decimals %d", decimals)
+}
+
+func waitCommit() {
+	time.Sleep(18 * time.Second)
 }
