@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"math/big"
 	"time"
 
@@ -9,19 +10,29 @@ import (
 	"github.com/palettechain/palette-tool/utils"
 )
 
-const cfgPath = "config.toml"
+//const cfgPath = "local.toml"
 
 var (
-	logger = log.Logger("geth")
-	cfg    = config.GenerateConfig(cfgPath)
-	c      = utils.NewPaletteClient(cfg)
+	logger  = log.Logger("geth")
+	cfg    *config.Config
+	client *utils.PaletteClient
+
+	cfgpath string
 )
 
+func init() {
+	flag.StringVar(&cfgpath, "config", "local.toml", "set config path")
+}
+
 func main() {
+	flag.Parse()
+	cfg = config.GenerateConfig(cfgpath)
+	client = utils.NewPaletteClient(cfg)
+
 	// testMint()
 	testTransfer()
 	// testApprove()
-	// testTotalSupply(c)
+	// testTotalSupply(client)
 	// testDecimals()
 }
 
@@ -29,7 +40,7 @@ func main() {
 //	var amount int64 = 10000
 //
 //	data := new(big.Int).Mul(big.NewInt(amount), utils.OnePLT)
-//	hash, err := c.PLTMint(data)
+//	hash, err := client.PLTMint(data)
 //	if err != nil {
 //		logger.Fatal(err)
 //	}
@@ -37,7 +48,7 @@ func main() {
 //
 //	waitCommit()
 //
-//	if err := c.DumpEventLog(hash); err != nil {
+//	if err := client.DumpEventLog(hash); err != nil {
 //		logger.Fatal(err)
 //	}
 //}
@@ -47,9 +58,9 @@ func testTransfer() {
 	var num int64 = 10
 
 	amount := new(big.Int).Mul(big.NewInt(num), utils.OnePLT)
-	to := c.TestAccounts[0].Address
+	to := client.TestAccounts[0].Address
 
-	hash, err := c.PLTTransfer(c.Admin.PrivateKey, to, amount)
+	hash, err := client.PLTTransfer(client.Admin.PrivateKey, to, amount)
 	if err != nil {
 		logger.Fatal(err)
 	}
@@ -57,7 +68,7 @@ func testTransfer() {
 
 	waitCommit()
 
-	if err := c.DumpEventLog(hash); err != nil {
+	if err := client.DumpEventLog(hash); err != nil {
 		logger.Fatal(err)
 	}
 }
@@ -66,11 +77,11 @@ func testTransfer() {
 func testApprove() {
 	var num int64 = 10
 
-	owner := c.TestAccounts[0].PrivateKey
-	spender := c.TestAccounts[1].Address
+	owner := client.TestAccounts[0].PrivateKey
+	spender := client.TestAccounts[1].Address
 	amount := new(big.Int).Mul(big.NewInt(num), utils.OnePLT)
 
-	hash, err := c.PLTApprove(owner, spender, amount)
+	hash, err := client.PLTApprove(owner, spender, amount)
 	if err != nil {
 		logger.Fatal(err)
 	}
@@ -78,13 +89,13 @@ func testApprove() {
 
 	waitCommit()
 
-	if err := c.DumpEventLog(hash); err != nil {
+	if err := client.DumpEventLog(hash); err != nil {
 		logger.Fatal(err)
 	}
 }
 
 func testTotalSupply() {
-	amount, err := c.PLTTotalSupply()
+	amount, err := client.PLTTotalSupply()
 	if err != nil {
 		logger.Fatal(err)
 	}
@@ -94,7 +105,7 @@ func testTotalSupply() {
 }
 
 func testDecimals() {
-	decimals, err := c.PLTDecimals()
+	decimals, err := client.PLTDecimals()
 	if err != nil {
 		logger.Fatal(err)
 	}
