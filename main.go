@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 	"time"
 
@@ -9,8 +10,6 @@ import (
 	"github.com/palettechain/palette-tool/config"
 	"github.com/palettechain/palette-tool/utils"
 )
-
-//const cfgPath = "local.toml"
 
 var (
 	logger  = log.Logger("geth")
@@ -34,24 +33,8 @@ func main() {
 	// testApprove()
 	// testTotalSupply(client)
 	// testDecimals()
+	// testAddValidator()
 }
-
-//func testMint() {
-//	var amount int64 = 10000
-//
-//	data := new(big.Int).Mul(big.NewInt(amount), utils.OnePLT)
-//	hash, err := client.PLTMint(data)
-//	if err != nil {
-//		logger.Fatal(err)
-//	}
-//	logger.Infof("mint hash %s", hash.Hex())
-//
-//	waitCommit()
-//
-//	if err := client.DumpEventLog(hash); err != nil {
-//		logger.Fatal(err)
-//	}
-//}
 
 // 管理员给测试用户转账10PLT
 func testTransfer() {
@@ -86,6 +69,21 @@ func testApprove() {
 		logger.Fatal(err)
 	}
 	logger.Infof("approve hash %s", hash.Hex())
+
+	waitCommit()
+
+	if err := client.DumpEventLog(hash); err != nil {
+		logger.Fatal(err)
+	}
+}
+
+func testAddValidator() {
+	validator := common.HexToAddress("")
+	hash, err := client.AddValidator(validator)
+	if err != nil {
+		logger.Fatal(err)
+	}
+	logger.Infof("add validator hash %s", hash.Hex())
 
 	waitCommit()
 
