@@ -99,14 +99,14 @@ func (c *PaletteClient) DumpEventLog(hash common.Hash) error {
 	return nil
 }
 
-func (c *PaletteClient) CallContract(from, to common.Address, payload []byte) ([]byte, error) {
+func (c *PaletteClient) CallContract(from, to common.Address, payload []byte, blockNum string) ([]byte, error) {
 	var res hexutil.Bytes
 	arg := ethereum.CallMsg{
 		From: from,
-		To:   &PLTAddress,
+		To:   &to,
 		Data: payload,
 	}
-	err := c.CallContext(context.Background(), &res, "eth_call", toCallArg(arg), "latest")
+	err := c.CallContext(context.Background(), &res, "eth_call", toCallArg(arg), blockNum)
 	if err != nil {
 		return nil, err
 	}

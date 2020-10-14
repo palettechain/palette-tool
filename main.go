@@ -29,11 +29,12 @@ func main() {
 	client = utils.NewPaletteClient(cfg)
 
 	// testMint()
-	testTransfer()
+	// testTransfer()
 	// testApprove()
-	// testTotalSupply(client)
+	// testTotalSupply()
 	// testDecimals()
 	// testAddValidator()
+	testGetRewardRecordBlockProposerAndHeight()
 }
 
 // 管理员给测试用户转账10PLT
@@ -78,8 +79,8 @@ func testApprove() {
 }
 
 func testAddValidator() {
-	validator := common.HexToAddress("")
-	hash, err := client.AddValidator(validator)
+	validator := common.HexToAddress("0x6a708455c8777630aac9d1e7702d13f7a865b27c")
+	hash, err := client.AddValidator(validator, false)
 	if err != nil {
 		logger.Fatal(err)
 	}
@@ -90,6 +91,18 @@ func testAddValidator() {
 	if err := client.DumpEventLog(hash); err != nil {
 		logger.Fatal(err)
 	}
+}
+
+func testGetRewardRecordBlockProposerAndHeight() {
+	blockNum, err := client.GetRewardRecordBlock("latest")
+	if err != nil {
+		logger.Fatal(err)
+	}
+	proposer, err := client.GetLatestRewardProposer("latest")
+	if err != nil {
+		logger.Fatal(err)
+	}
+	logger.Infof("latest reward block height %v, proposer %v", blockNum.Uint64(), proposer.Hex())
 }
 
 func testTotalSupply() {

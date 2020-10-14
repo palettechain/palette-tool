@@ -55,7 +55,7 @@ func (c *PaletteClient) PLTTotalSupply() (*big.Int, error) {
 		return nil, err
 	}
 
-	raw, err := c.CallContract(c.AdminAddress(), PLTAddress, payload)
+	raw, err := c.CallContract(c.AdminAddress(), PLTAddress, payload, "latest")
 	if err != nil {
 		return nil, fmt.Errorf("failed to get total supply: [%v]", err)
 	}
@@ -70,7 +70,7 @@ func (c *PaletteClient) PLTDecimals() (uint64, error) {
 		return 0, err
 	}
 
-	raw, err := c.CallContract(c.AdminAddress(), PLTAddress, payload)
+	raw, err := c.CallContract(c.AdminAddress(), PLTAddress, payload, "latest")
 	if err != nil {
 		return 0, fmt.Errorf("failed to get decimal: [%v]", err)
 	}
