@@ -14,30 +14,33 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
 
-package reinit
+package main
 
 import (
-  "strings"
+	"fmt"
+	"os"
 
-  "github.com/urfave/cli"
+	"github.com/palettechain/palette-tools/cmd/tools/setup"
+	"github.com/palettechain/palette-tools/cmd/utils"
+	"github.com/urfave/cli"
 )
 
 var (
-  nodeKeyFlag = cli.StringFlag{
-    Name:  "nodekey",
-    Usage: "String of comma separated nodekey values",
-  }
-
-  quorumFlag = cli.BoolFlag{
-    Name:  "quorum",
-    Usage: "Use Quorum",
-  }
+	Version string // this is externalized via -X flag
 )
 
-func splitAndTrim(input string) []string {
-  result := strings.Split(input, ",")
-  for i, r := range result {
-    result[i] = strings.TrimSpace(r)
-  }
-  return result
+func main() {
+	app := utils.NewApp()
+	app.Usage = "the istanbul-tools command line interface"
+
+	app.Version = Version
+	app.Copyright = "Copyright 2017 The AMIS Authors"
+	app.Commands = []cli.Command{
+		setup.SetupCommand,
+	}
+
+	if err := app.Run(os.Args); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
 }

@@ -22,8 +22,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core"
-
-	"github.com/palettechain/palette-tools/cmd/istanbul/extra"
+	"github.com/palettechain/palette-tools/cmd/tools/extra"
 )
 
 type Option func(*core.Genesis)

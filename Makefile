@@ -10,20 +10,16 @@ ifeq (linux,$(OS))
 	LDFLAGS+= -linkmode external -extldflags "-static"
 endif
 
-istanbul:
-	@GOPATH=$(GOPATH) go build -v -o ./build/bin/istanbul ./cmd/istanbul
+tool:
+	@GOPATH=$(GOPATH) go build -v -o ./build/bin/palette-tool ./cmd/tools
 	@echo "Done building."
-	@echo "Run \"$(GOBIN)/istanbul\" to launch istanbul."
+	@echo "Run \"$(GOBIN)/palette-tool\" to launch palette-tool."
 
 dist: clean
-	@GOPATH=$(GOPATH) go build -ldflags='$(LDFLAGS)' -o ./build/bin/istanbul ./cmd/istanbul
-	@tar cfvz ./build/istanbul-tools_$(VERSION)_$(OS)_$(ARCH).tar.gz -C ./build/bin istanbul
+	@GOPATH=$(GOPATH) go build -ldflags='$(LDFLAGS)' -o ./build/bin/palette-tool ./cmd/tools
+	@tar cfvz ./build/palette-tools_$(VERSION)_$(OS)_$(ARCH).tar.gz -C ./build/bin palette-tool
 	@echo "Distribution file created."
 	@ls -lh ./build
-
-load-testing:
-	@echo "Run load testing"
-	@CURDIR=$(CURDIR) go test -v github.com/jpmorganchase/istanbul-tools/tests/load/... --timeout 1h
 
 clean:
 	rm -rf build
