@@ -16,39 +16,39 @@
 
 package extra
 
-import (
-	"strings"
-
-	"github.com/urfave/cli"
-)
-
-var (
-	configFlag = cli.StringFlag{
-		Name:  "config",
-		Usage: "TOML configuration file",
-	}
-
-	extraDataFlag = cli.StringFlag{
-		Name:  "extradata",
-		Usage: "Hex string for RLP encoded Istanbul extraData",
-	}
-
-	validatorsFlag = cli.StringFlag{
-		Name:  "validators",
-		Usage: "Validators for RLP encoded Istanbul extraData",
-	}
-
-	vanityFlag = cli.StringFlag{
-		Name:  "vanity",
-		Usage: "Vanity for RLP encoded Istanbul extraData",
-		Value: "0x00",
-	}
-)
-
-func splitAndTrim(input string) []string {
-	result := strings.Split(input, ",")
-	for i, r := range result {
-		result[i] = strings.TrimSpace(r)
-	}
-	return result
-}
+//import (
+//	"strings"
+//
+//	"github.com/urfave/cli"
+//)
+//
+//var (
+//	configFlag = cli.StringFlag{
+//		Name:  "config",
+//		Usage: "TOML configuration file",
+//	}
+//
+//	extraDataFlag = cli.StringFlag{
+//		Name:  "extradata",
+//		Usage: "Hex string for RLP encoded Istanbul extraData",
+//	}
+//
+//	validatorsFlag = cli.StringFlag{
+//		Name:  "validators",
+//		Usage: "Validators for RLP encoded Istanbul extraData",
+//	}
+//
+//	vanityFlag = cli.StringFlag{
+//		Name:  "vanity",
+//		Usage: "Vanity for RLP encoded Istanbul extraData",
+//		Value: "0x00",
+//	}
+//)
+//
+//func splitAndTrim(input string) []string {
+//	result := strings.Split(input, ",")
+//	for i, r := range result {
+//		result[i] = strings.TrimSpace(r)
+//	}
+//	return result
+//}
