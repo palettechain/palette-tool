@@ -1,4 +1,4 @@
-module github.com/palettechain/palette-tools
+module github.com/palettechain/palette-tool
 
 go 1.15
 

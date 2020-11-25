@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/palettechain/palette-tools/cmd/tools/setup"
-	"github.com/palettechain/palette-tools/cmd/utils"
+	"github.com/palettechain/palette-tool/cmd/tools/setup"
+	"github.com/palettechain/palette-tool/cmd/utils"
 	"github.com/urfave/cli"
 )
 

@@ -17,7 +17,7 @@
 package genesis
 
 import (
-	logging "github.com/palettechain/palette-tools/log"
+	logging "github.com/palettechain/palette-tool/log"
 )
 
 var log = logging.New()

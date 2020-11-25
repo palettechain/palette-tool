@@ -27,7 +27,7 @@ import (
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/params"
-	"github.com/palettechain/palette-tools/common"
+	"github.com/palettechain/palette-tool/common"
 )
 
 const (
