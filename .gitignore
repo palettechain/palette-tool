@@ -5,3 +5,4 @@ upload.sh
 download.sh
 bin
 test*
+.idea
