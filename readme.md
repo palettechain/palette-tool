@@ -10,7 +10,7 @@ in order to build genesis network. first, you should prepare items as follow:
 
 1.run command like this:
 ```bash
-./build/bin/palette-tool setup --nodes --num 4 --verbose --save
+./bin/palette-tool setup --nodes --num 4 --verbose --save
 ```
 This command will generate 4 points nodekey and validator files, these files are stored in the directory of `setup/nodekeys`.
 

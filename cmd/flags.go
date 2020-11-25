@@ -14,41 +14,34 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
 
-package extra
+package cmd
 
-//import (
-//	"strings"
-//
-//	"github.com/urfave/cli"
-//)
-//
-//var (
-//	configFlag = cli.StringFlag{
-//		Name:  "config",
-//		Usage: "TOML configuration file",
-//	}
-//
-//	extraDataFlag = cli.StringFlag{
-//		Name:  "extradata",
-//		Usage: "Hex string for RLP encoded Istanbul extraData",
-//	}
-//
-//	validatorsFlag = cli.StringFlag{
-//		Name:  "validators",
-//		Usage: "Validators for RLP encoded Istanbul extraData",
-//	}
-//
-//	vanityFlag = cli.StringFlag{
-//		Name:  "vanity",
-//		Usage: "Vanity for RLP encoded Istanbul extraData",
-//		Value: "0x00",
-//	}
-//)
-//
-//func splitAndTrim(input string) []string {
-//	result := strings.Split(input, ",")
-//	for i, r := range result {
-//		result[i] = strings.TrimSpace(r)
-//	}
-//	return result
-//}
+import "github.com/urfave/cli"
+
+var (
+	numOfValidatorsFlag = cli.IntFlag{
+		Name:  "num",
+		Usage: "Number of validators",
+	}
+
+	verboseFlag = cli.BoolFlag{
+		Name:  "verbose",
+		Usage: "Print validator details",
+	}
+
+	staticNodesFlag = cli.BoolFlag{
+		Name:  "nodes",
+		Usage: "Print static nodes template",
+	}
+
+	//Should quorumFlag be removed as the value now appears to be hardcoded to 'true' in genesis.go?
+	quorumFlag = cli.BoolFlag{
+		Name:  "quorum",
+		Usage: "Use Quorum",
+	}
+
+	saveFlag = cli.BoolFlag{
+		Name:  "save",
+		Usage: "Save to files",
+	}
+)

@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/palettechain/palette-tool/cmd/tools/setup"
-	"github.com/palettechain/palette-tool/cmd/utils"
+	"github.com/palettechain/palette-tool/cmd"
+	"github.com/palettechain/palette-tool/utils"
 	"github.com/urfave/cli"
 )
 
@@ -36,7 +36,7 @@ func main() {
 	app.Version = Version
 	app.Copyright = "Copyright 2017 The AMIS Authors"
 	app.Commands = []cli.Command{
-		setup.SetupCommand,
+		cmd.SetupCommand,
 	}
 
 	if err := app.Run(os.Args); err != nil {
